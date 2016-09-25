@@ -155,7 +155,7 @@ namespace CieloPay.ClientApp.App.Pages
                 {
                     var lioOrder = new LioOrder
                     {
-                        Reference = DateTime.Now.ToString("yyyyMMddHHmmssfff"),
+                        Reference = "Pedido #" + DateTime.Now.ToString("ssfff"),
                         UserId = 1,
                         Status = "ENTERED",
                         PaymentId = Guid.Parse(response.Payment.PaymentId),
