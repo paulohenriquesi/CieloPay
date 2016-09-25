@@ -70,6 +70,8 @@
     <Compile Include="ViewModel\MyOrdersViewModel.cs" />
     <Compile Include="ViewModel\Transaction.cs" />
     <Compile Include="ViewModel\Items.cs" />
+    <Compile Include="ViewModel\User.cs" />
+    <Compile Include="ViewModel\Address.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">

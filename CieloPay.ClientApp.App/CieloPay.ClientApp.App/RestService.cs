@@ -41,14 +41,17 @@ namespace CieloPay.ClientApp.App
 			}
 		}
 
-        public async Task<FoodMenuItemViewModel> Food(FoodMenuItemViewModel Id)
+		public User User()
         {
 
-            var uri = new Uri(string.Format("http://api20160924093032.azurewebsites.net/api/produto/" + Id, string.Empty));
+            using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri("http://api20160924093032.azurewebsites.net/api/");
 
-            var response = await this.client.GetAsync(uri);
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<FoodMenuItemViewModel>(content);
+				var response = client.GetAsync("user/1").Result;
+				var content = response.Content.ReadAsStringAsync().Result;
+				return JsonConvert.DeserializeObject<User>(content);
+			}
         }
     }
 }

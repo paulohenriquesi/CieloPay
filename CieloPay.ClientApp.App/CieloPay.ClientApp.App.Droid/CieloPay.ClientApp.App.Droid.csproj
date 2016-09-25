@@ -139,7 +139,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CieloPay.ClientApp.App\CieloPay.ClientApp.App.csproj">
       <Project>{1EE4AE54-9AA3-477E-A6FB-3EC28AF5B709}</Project>
-      <Name>PedidoFacin.Drugstore.App</Name>
+      <Name>CieloPay.ClientApp.App</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
