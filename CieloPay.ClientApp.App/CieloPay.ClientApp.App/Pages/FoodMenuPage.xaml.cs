@@ -42,6 +42,11 @@ namespace CieloPay.ClientApp.App.Pages
     {
         public VetCell()
         {
+			this.Tapped += (sender, args) =>
+			{
+				cell.View.BackgroundColor = Color.Purple;
+			};
+
             var vetProfileImage = new CircleImage
             {
                 BorderColor = Color.FromRgb(4, 175, 240),
