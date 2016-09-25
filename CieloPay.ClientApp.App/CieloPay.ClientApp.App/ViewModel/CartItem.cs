@@ -1,6 +1,4 @@
-﻿using PedidoFacin.Drugstore.App.ViewModel;
-
-namespace CieloPay.ClientApp.App.ViewModel
+﻿namespace CieloPay.ClientApp.App.ViewModel
 {
     public class CartItem
     {

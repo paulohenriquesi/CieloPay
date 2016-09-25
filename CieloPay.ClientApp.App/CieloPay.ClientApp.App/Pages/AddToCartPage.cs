@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CieloPay.ClientApp.App.ViewModel;
-using PedidoFacin.Drugstore.App.ViewModel;
 using Xamarin.Forms;
 
 namespace CieloPay.ClientApp.App.Pages
@@ -14,27 +13,27 @@ namespace CieloPay.ClientApp.App.Pages
 
             var image = new Image
             {
-                Source = ImageSource.FromUri(new Uri("http://hotdogpontocerto.loja2.com.br/img/0c9ea046015a690e8f3db995fbd46a4f.png")),
+                Source = ImageSource.FromUri(new Uri(product.Image)),
                 HeightRequest = 250,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
             var titleLabel = new Label
             {
-                Text = "X-Tudo",
+                Text = product.Name,
                 FontSize = 24,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
             var descriptionLabel = new Label
             {
-                Text = "Descrição maneira pro meu lanche mega irado que vai vender muito.",
+                Text = product.Description,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
             var priceLabel = new Label
             {
-                Text = "R$ 75,00",
+                Text = "R$ " + product.Price.ToString("N2"),
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
@@ -57,6 +56,7 @@ namespace CieloPay.ClientApp.App.Pages
             buttonAdd.Clicked += (sender, args) =>
             {
                 cart.Add(new CartItem { Product = product, Quantity = quantityText.SelectedIndex + 1 });
+                Navigation.PopModalAsync();
             };
 
             layout.Children.Add(image);

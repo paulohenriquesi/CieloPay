@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CieloPay.ClientApp.App.ViewModel;
 using Newtonsoft.Json;
-using PedidoFacin.Drugstore.App.ViewModel;
 
 namespace CieloPay.ClientApp.App
 {

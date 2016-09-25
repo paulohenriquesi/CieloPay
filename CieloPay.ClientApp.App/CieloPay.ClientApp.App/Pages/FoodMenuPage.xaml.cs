@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using CieloPay.ClientApp.App.ViewModel;
 using ImageCircle.Forms.Plugin.Abstractions;
-using PedidoFacin.Drugstore.App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Themes;
 
@@ -14,6 +13,7 @@ namespace CieloPay.ClientApp.App.Pages
 
         public FoodMenuPage()
         {
+            this.Cart = new List<CartItem>();
             var restService = new RestService();
 
             InitializeComponent();

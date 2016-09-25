@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
-namespace PedidoFacin.Drugstore.App.ViewModel
+﻿namespace CieloPay.ClientApp.App.ViewModel
 {
     public class FoodMenuItemViewModel
     {
