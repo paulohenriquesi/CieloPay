@@ -18,7 +18,7 @@ namespace CieloPay.ClientApp.App.CieloApi.Model
         public long Amount { get; set; }
         public Card CreditCard { get; set; }
         public byte Status { get; set; }
-        public Guid PaymentId { get; set; }
+        public string PaymentId { get; set; }
     }
 
     public class Card

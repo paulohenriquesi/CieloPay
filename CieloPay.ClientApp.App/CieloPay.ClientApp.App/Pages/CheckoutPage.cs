@@ -158,14 +158,16 @@ namespace CieloPay.ClientApp.App.Pages
                         Reference = DateTime.Now.ToString("yyyyMMddHHmmssfff"),
                         UserId = 1,
                         Status = "ENTERED",
-                        PaymentId = sale.Payment.PaymentId,
+                        PaymentId = Guid.Parse(response.Payment.PaymentId),
+                        VelocityApproved = cardPicker.SelectedIndex == 0,
                         Items = cart.Select(x => new LioOrderItem
                         {
                             Name = x.Product.Name,
                             Description = x.Product.Description,
                             Quantity = x.Quantity,
                             Sku = DateTime.Now.ToString("HHmmssfff"),
-                            Unit_Price = x.Product.Price
+                            Unit_Price = x.Product.Price,
+                            ImageUrl = x.Product.Image
                         }).ToList()
                     };
 
