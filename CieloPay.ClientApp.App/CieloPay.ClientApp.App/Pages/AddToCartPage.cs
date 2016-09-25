@@ -39,10 +39,10 @@ namespace CieloPay.ClientApp.App.Pages
 
             var quantityText = new Picker
             {
-                SelectedIndex = 0,
-
                 Items = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
             };
+
+            quantityText.SelectedIndex = 0;
 
             var buttonAdd = new Button
             {

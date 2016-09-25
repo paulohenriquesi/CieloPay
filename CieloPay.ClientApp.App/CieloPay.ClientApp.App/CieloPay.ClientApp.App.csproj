@@ -41,6 +41,7 @@
     <Compile Include="CieloApi\CieloApiClient.cs" />
     <Compile Include="CieloApi\Model\Sale.cs" />
     <Compile Include="Pages\AddToCartPage.cs" />
+    <Compile Include="Pages\CheckoutPage.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

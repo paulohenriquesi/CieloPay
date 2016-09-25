@@ -49,6 +49,12 @@ namespace CieloPay.ClientApp.App.Pages
             stackLayout.Children.Add(list);
             stackLayout.Children.Add(cart);
 
+            closeButton.Clicked += (sender, args) =>
+            {
+                var checkoutPage = new CheckoutPage(this.Cart);
+                this.Navigation.PushModalAsync(checkoutPage);
+            };
+
             this.Content = stackLayout;
         }
     }
