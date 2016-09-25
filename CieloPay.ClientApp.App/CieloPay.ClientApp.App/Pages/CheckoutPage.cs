@@ -68,8 +68,6 @@ namespace CieloPay.ClientApp.App.Pages
                 i++;
             }
 
-            i++;
-
             grid.Children.Add(new Label { Text = "Total", FontSize = 18 }, 0, i);
             grid.Children.Add(new Label { Text = "R$ " + cart.Sum(x => x.Quantity * x.Product.Price).ToString("N2"), FontSize = 18 }, 2, i);
 
@@ -78,8 +76,24 @@ namespace CieloPay.ClientApp.App.Pages
                 Text = "Finalizar"
             };
 
+            var cards = new Dictionary<Guid, string>
+            {
+                {Guid.Parse("df0f3a85-8633-475a-aea0-f052cf8058c0"), "476608******5300"},
+                {Guid.Parse("813572bf-6524-4fca-8c51-235bbd93e9e2"), "516230******0400"}
+            };
+
+            var cardPicker = new Picker();
+
+            foreach (var card in cards)
+            {
+                cardPicker.Items.Add(card.Value);
+            }
+
+            cardPicker.SelectedIndex = 0;
+
             layout.Children.Add(titleLabel);
             layout.Children.Add(grid);
+            layout.Children.Add(cardPicker);
             layout.Children.Add(closeButton);
 
             this.Content = layout;
@@ -97,11 +111,14 @@ namespace CieloPay.ClientApp.App.Pages
                     },
                     Payment = new Payment
                     {
-                        Amount = Convert.ToInt64(cart.Sum(x => x.Quantity * x.Product.Price) * 100),
+                        Amount = Convert.ToInt64(cart.Sum(x => x.Quantity*x.Product.Price)*100),
                         Installments = 1,
                         CreditCard = new Card
                         {
-                            CardToken = Guid.Parse("df0f3a85-8633-475a-aea0-f052cf8058c0")
+                            CardToken =
+                                cardPicker.SelectedIndex == 0
+                                    ? Guid.Parse("df0f3a85-8633-475a-aea0-f052cf8058c0")
+                                    : Guid.Parse("813572bf-6524-4fca-8c51-235bbd93e9e2")
                         }
                     }
                 };
@@ -112,6 +129,7 @@ namespace CieloPay.ClientApp.App.Pages
                 {
                     var lioOrder = new LioOrder
                     {
+                        Reference = DateTime.Now.ToString("yyyyMMddHHmmssfff"),
                         UserId = 1,
                         Status = "ENTERED",
                         PaymentId = sale.Payment.PaymentId,
@@ -125,10 +143,13 @@ namespace CieloPay.ClientApp.App.Pages
                         }).ToList()
                     };
 
-                    cs.PostOrder(lioOrder);
-                }
+                    var lr = cs.PostOrder(lioOrder);
 
-                this.Navigation.PopModalAsync();
+                    cart = new List<CartItem>();
+
+                    this.Navigation.PopModalAsync();
+                    this.Navigation.PushModalAsync(new CheckoutSuccessPage(lr.LioResponseId));
+                }
             };
         }
     }

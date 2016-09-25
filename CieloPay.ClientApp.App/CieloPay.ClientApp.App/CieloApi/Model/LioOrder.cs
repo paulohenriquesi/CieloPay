@@ -5,6 +5,7 @@ namespace CieloPay.ClientApp.App.CieloApi.Model
 {
     public class LioOrder
     {
+        public string Reference { get; set; }
         public string Status { get; set; }
         public List<LioOrderItem> Items { get; set; }
         public int UserId { get; set; }
