@@ -17,7 +17,7 @@ namespace CieloPay.ClientApp.App.Pages
             var list = new ListView
             {
                 HasUnevenRows = true,
-                ItemTemplate = new DataTemplate(typeof(VetCell)),
+                ItemTemplate = new DataTemplate(typeof(FoddMenuCell)),
                 ItemsSource = drugstores,
                 SeparatorColor = Color.Gray
             };
@@ -34,13 +34,20 @@ namespace CieloPay.ClientApp.App.Pages
                 });
             }
 
+            list.ItemTapped += (sender, args) =>
+            {
+                var addToCartPage = new AddToCartPage(1);
+
+                this.Navigation.PushModalAsync(addToCartPage);
+            };
+
             this.Content = list;
         }
     }
 
-    public class VetCell : ViewCell
+    public class FoddMenuCell : ViewCell
     {
-        public VetCell()
+        public FoddMenuCell()
         {
             var vetProfileImage = new CircleImage
             {
@@ -68,7 +75,7 @@ namespace CieloPay.ClientApp.App.Pages
                 FontSize = 12,
                 TextColor = Color.FromHex("#666")
             };
-            descriptionLabel.SetBinding(Label.TextProperty, new Binding("Description", stringFormat: "{0} Miles Away"));
+            descriptionLabel.SetBinding(Label.TextProperty, new Binding("Description"));
 
             var starLabel = new Label()
             {
@@ -82,7 +89,7 @@ namespace CieloPay.ClientApp.App.Pages
                 FontSize = 14,
                 TextColor = Color.Black
             };
-            priceLabel.SetBinding(Label.TextProperty, "Price", BindingMode.Default, null, " - R$  {0}");
+            priceLabel.SetBinding(Label.TextProperty, "Price", stringFormat: " - R$  {0}");
 
             var starImage = new Image()
             {
@@ -121,7 +128,6 @@ namespace CieloPay.ClientApp.App.Pages
                 Children = { vetProfileImage, vetDetailsLayout }
             };
             
-
             this.View = cellLayout;
         }
     }
