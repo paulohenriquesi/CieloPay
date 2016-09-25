@@ -11,6 +11,7 @@ namespace CieloPay.ClientApp.App.CieloApi.Model
         public int UserId { get; set; }
         public string LioResponseId { get; set; }
         public Guid PaymentId { get; set; }
+        public bool VelocityApproved { get; set; }
     }
 
     public class LioOrderItem
@@ -20,5 +21,6 @@ namespace CieloPay.ClientApp.App.CieloApi.Model
         public string Description { get; set; }
         public decimal Unit_Price { get; set; }
         public int Quantity { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
