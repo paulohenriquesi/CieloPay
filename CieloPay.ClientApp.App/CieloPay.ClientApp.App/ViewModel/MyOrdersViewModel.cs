@@ -36,6 +36,7 @@ namespace CieloPay.ClientApp.App
 			set;
 		}
 		public List<Items> Items { get; set;}
+
 		public string Notes
 		{
 			get;
@@ -46,10 +47,11 @@ namespace CieloPay.ClientApp.App
 			get;
 			set;
 		}
+		private decimal _price;
 		public decimal Price
 		{
-			get;
-			set;
+			get { return _price / 100; }
+			set { _price = value;}
 		}
 		public decimal Remaining
 		{

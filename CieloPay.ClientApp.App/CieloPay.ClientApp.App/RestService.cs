@@ -24,8 +24,10 @@ namespace CieloPay.ClientApp.App
                 client.BaseAddress = new Uri("http://api20160924093032.azurewebsites.net/api/");
 
                 var response = client.GetAsync("produto").Result;
+
                 var content = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<List<FoodMenuItemViewModel>>(content);
+                return  JsonConvert.DeserializeObject<List<FoodMenuItemViewModel>>(content);
+
             }
         }
             

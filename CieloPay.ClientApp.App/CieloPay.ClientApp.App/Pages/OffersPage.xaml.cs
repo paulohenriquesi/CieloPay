@@ -21,6 +21,11 @@ namespace CieloPay.ClientApp.App.Pages
 				SeparatorColor = Color.Gray,
 				Behaviors = { }
 			};
+			list.ItemTapped += (sender, args) =>
+			{
+				var ItemsOrderPage = new ItemsOrderPage((args.Item as MyOrdersViewModel).Items, args.Item as MyOrdersViewModel);
+				this.Navigation.PushModalAsync(ItemsOrderPage);
+			};
 			stackLayout.Children.Add(list);
 			this.Content = stackLayout;
 		}
