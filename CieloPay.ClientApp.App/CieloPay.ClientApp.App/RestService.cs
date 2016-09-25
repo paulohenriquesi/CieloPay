@@ -29,6 +29,17 @@ namespace CieloPay.ClientApp.App
             }
         }
             
+		public List<MyOrdersViewModel> Orders()
+		{
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri("http://api20160924093032.azurewebsites.net/api/");
+
+				var response = client.GetAsync("pedido").Result;
+				var content = response.Content.ReadAsStringAsync().Result;
+				return JsonConvert.DeserializeObject<List<MyOrdersViewModel>>(content);
+			}
+		}
 
         public async Task<FoodMenuItemViewModel> Food(FoodMenuItemViewModel Id)
         {

@@ -8,5 +8,6 @@ namespace CieloPay.ClientApp.App.Pages
         {
             InitializeComponent();
         }
+
     }
 }

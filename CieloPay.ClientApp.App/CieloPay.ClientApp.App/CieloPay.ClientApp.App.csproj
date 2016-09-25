@@ -64,6 +64,9 @@
     <Compile Include="RestService.cs" />
     <Compile Include="ViewModel\CartItem.cs" />
     <Compile Include="ViewModel\FoodMenuItemViewModel.cs" />
+    <Compile Include="ViewModel\MyOrdersViewModel.cs" />
+    <Compile Include="ViewModel\Transaction.cs" />
+    <Compile Include="ViewModel\Items.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
