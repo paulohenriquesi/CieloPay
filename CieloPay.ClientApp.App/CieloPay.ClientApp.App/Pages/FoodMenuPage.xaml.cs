@@ -49,6 +49,11 @@ namespace CieloPay.ClientApp.App.Pages
     {
         public FoddMenuCell()
         {
+			this.Tapped += (sender, args) =>
+			{
+				cell.View.BackgroundColor = Color.Purple;
+			};
+
             var vetProfileImage = new CircleImage
             {
                 BorderColor = Color.FromRgb(4, 175, 240),
