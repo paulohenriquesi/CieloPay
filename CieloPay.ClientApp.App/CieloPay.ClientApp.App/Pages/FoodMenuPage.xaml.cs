@@ -14,6 +14,8 @@ namespace CieloPay.ClientApp.App.Pages
 
         public FoodMenuPage()
         {
+            var restService = new RestService();
+
             InitializeComponent();
 
             var stackLayout = new StackLayout();
@@ -26,28 +28,16 @@ namespace CieloPay.ClientApp.App.Pages
 
             cart.Children.Add(closeButton);
 
-            var foodMenu = new List<FoodMenuItemViewModel>();
-
+            var items = restService.RefreshFoodMenu();
+            
             var list = new ListView
             {
                 HasUnevenRows = true,
                 ItemTemplate = new DataTemplate(typeof(FoddMenuCell)),
-                ItemsSource = foodMenu,
+                ItemsSource = items,
                 SeparatorColor = Color.Gray,
                 Behaviors = { }
             };
-
-            for (int i = 1; i <= 10; i++)
-            {
-                foodMenu.Add(new FoodMenuItemViewModel
-                {
-                    Name = "X TUDO",
-                    Image = "icon.png",
-                    Description = "3 carnes de picanha",
-                    Rate = 4.5M,
-                    Price = 1.33M * i
-                });
-            }
 
             list.ItemTapped += (sender, args) =>
             {
