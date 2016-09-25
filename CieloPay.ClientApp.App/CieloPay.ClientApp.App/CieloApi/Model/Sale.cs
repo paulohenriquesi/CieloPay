@@ -16,8 +16,9 @@ namespace CieloPay.ClientApp.App.CieloApi.Model
         public string Provider => "Simulado";
         public int Installments { get; set; }
         public long Amount { get; set; }
-        public Card Card { get; set; }
+        public Card CreditCard { get; set; }
         public byte Status { get; set; }
+        public Guid PaymentId { get; set; }
     }
 
     public class Card
