@@ -76,6 +76,18 @@ namespace CieloPay.ClientApp.App.Pages
                 Text = "Finalizar"
             };
 
+            var shippingPicker = new Picker
+            {
+                Items =
+                {
+                    "Retirar na loja",
+                    "Entrega + R$ 3,00"
+                }
+            };
+
+            shippingPicker.SelectedIndex = 0;
+
+
             var cards = new Dictionary<Guid, string>
             {
                 {Guid.Parse("df0f3a85-8633-475a-aea0-f052cf8058c0"), "476608******5300"},
@@ -93,6 +105,8 @@ namespace CieloPay.ClientApp.App.Pages
 
             layout.Children.Add(titleLabel);
             layout.Children.Add(grid);
+            layout.Children.Add(new Label { Text = "Cartão:" });
+            layout.Children.Add(shippingPicker);
             layout.Children.Add(cardPicker);
             layout.Children.Add(closeButton);
 
@@ -100,6 +114,18 @@ namespace CieloPay.ClientApp.App.Pages
 
             closeButton.Clicked += (sender, args) =>
             {
+                if(shippingPicker.SelectedIndex == 1)
+                    cart.Add(new CartItem
+                    {
+                        Quantity = 1,
+                        Product = new FoodMenuItemViewModel
+                        {
+                            Name = "Frete",
+                            Description = "Frete",
+                            Price = 3
+                        }
+                    });
+
                 var cs = new CieloApiClient();
 
                 var sale = new Sale
@@ -111,7 +137,7 @@ namespace CieloPay.ClientApp.App.Pages
                     },
                     Payment = new Payment
                     {
-                        Amount = Convert.ToInt64(cart.Sum(x => x.Quantity*x.Product.Price)*100),
+                        Amount = Convert.ToInt64(cart.Sum(x => x.Quantity * x.Product.Price) * 100),
                         Installments = 1,
                         CreditCard = new Card
                         {
@@ -145,10 +171,10 @@ namespace CieloPay.ClientApp.App.Pages
 
                     var lr = cs.PostOrder(lioOrder);
 
-                    cart = new List<CartItem>();
+                    cart.RemoveAll(x => x != null);
 
                     this.Navigation.PopModalAsync();
-                    this.Navigation.PushModalAsync(new CheckoutSuccessPage(lr.LioResponseId));
+                    this.Navigation.PushModalAsync(new CheckoutSuccessPage(lr.LioResponseId, cardPicker.SelectedIndex == 1));
                 }
             };
         }

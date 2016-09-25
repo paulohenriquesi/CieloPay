@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CieloPay.ClientApp.App.ViewModel;
 using Xamarin.Forms;
 
@@ -55,7 +56,15 @@ namespace CieloPay.ClientApp.App.Pages
 
             buttonAdd.Clicked += (sender, args) =>
             {
-                cart.Add(new CartItem { Product = product, Quantity = quantityText.SelectedIndex + 1 });
+                var ci = cart.FirstOrDefault(c => c.Product == product);
+
+                if (ci != null)
+                    ci.Quantity = ci.Quantity + quantityText.SelectedIndex + 1;
+                else
+                {
+                    cart.Add(new CartItem { Product = product, Quantity = quantityText.SelectedIndex + 1 });
+                }
+
                 Navigation.PopModalAsync();
             };
 

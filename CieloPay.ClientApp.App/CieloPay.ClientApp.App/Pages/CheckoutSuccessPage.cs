@@ -4,7 +4,7 @@ namespace CieloPay.ClientApp.App.Pages
 {
     public class CheckoutSuccessPage : ContentPage
     {
-        public CheckoutSuccessPage(string lioId)
+        public CheckoutSuccessPage(string lioId, bool highRisk)
         {
             var layout = new StackLayout();
             layout.Padding = 10;
@@ -27,6 +27,14 @@ namespace CieloPay.ClientApp.App.Pages
 
             layout.Children.Add(titleLabel);
             layout.Children.Add(lioIdLabel);
+
+            if (highRisk)
+            {
+                layout.Children.Add(new Label
+                {
+                    Text = "Para sua segurança, será necessária a digitação da senha no momento da entrega do produto."
+                });
+            }
 
             this.Content = layout;
         }
