@@ -44,13 +44,14 @@ namespace CieloPay.ClientApp.App.Pages
 					FontSize = 12,
 					TextColor = Color.Black
 				};
-				starLabel.SetBinding(Label.TextProperty, "Quantity", stringFormat: "Quantidade: {0}");
+				starLabel.SetBinding(Label.TextProperty, "Quantity");
 
 				var priceLabel = new Label()
 				{
 					FontSize = 14,
 					TextColor = Color.Black
 				};
+
 				priceLabel.SetBinding(Label.TextProperty, "Price", stringFormat: " Total : R$  {0}");
 
 
