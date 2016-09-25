@@ -97,7 +97,7 @@ namespace CieloPay.ClientApp.App.Pages
                     },
                     Payment = new Payment
                     {
-                        Amount = Convert.ToInt64(cart.Sum(x => x.Quantity*x.Product.Price)*100),
+                        Amount = Convert.ToInt64(cart.Sum(x => x.Quantity * x.Product.Price) * 100),
                         Installments = 1,
                         CreditCard = new Card
                         {
@@ -107,6 +107,28 @@ namespace CieloPay.ClientApp.App.Pages
                 };
 
                 var response = cs.PostSaleAsync(sale);
+
+                if (response.Payment.Status == 1)
+                {
+                    var lioOrder = new LioOrder
+                    {
+                        UserId = 1,
+                        Status = "ENTERED",
+                        PaymentId = sale.Payment.PaymentId,
+                        Items = cart.Select(x => new LioOrderItem
+                        {
+                            Name = x.Product.Name,
+                            Description = x.Product.Description,
+                            Quantity = x.Quantity,
+                            Sku = DateTime.Now.ToString("HHmmssfff"),
+                            Unit_Price = x.Product.Price
+                        }).ToList()
+                    };
+
+                    cs.PostOrder(lioOrder);
+                }
+
+                this.Navigation.PopModalAsync();
             };
         }
     }

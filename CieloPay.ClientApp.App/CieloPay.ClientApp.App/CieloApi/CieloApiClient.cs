@@ -29,5 +29,25 @@ namespace CieloPay.ClientApp.App.CieloApi
                 return sale;
             }
         }
+
+        public LioOrder PostOrder(LioOrder sale)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api20160924093032.azurewebsites.net/api/pedido");
+
+                var json = JsonConvert.SerializeObject(sale);
+
+                var response = client.PostAsync("", new StringContent(json, Encoding.UTF8, "text/json")).Result;
+                var strResponse = response.Content.ReadAsStringAsync().Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<LioOrder>(strResponse);
+                }
+
+                return sale;
+            }
+        }
     }
 }
